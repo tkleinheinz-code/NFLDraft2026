@@ -4,6 +4,13 @@
   <meta charset="UTF-8" />
   <title>NFL Draft Predictions</title>
   <style>
+    #countdown {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 20px 0;
+  letter-spacing: 1px;
+}
+
   html, body {
     height: 100%;
     margin: 0;
@@ -64,6 +71,7 @@
 <body>
   <div class="content">
     <h1>🏈 NFL Draft Predictions</h1>
+    <div id="countdown"></div>
     <p>Make your picks. Watch the board fall. Track the leaderboard.</p>
      </div>
 <div class="button-row">
@@ -86,5 +94,31 @@
   </a>
 </div>
   </div>
+<script>
+  // April 23, 2026 at 5:00 PM Pacific
+  const draftStart = new Date("April 23, 2026 14:00:00 GMT-07:00").getTime();
+  const countdownEl = document.getElementById("countdown");
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = draftStart - now;
+
+    if (distance <= 0) {
+      countdownEl.innerHTML = "🏈 The Draft Is Live!";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((distance / (1000 * 60)) % 60);
+    const seconds = Math.floor((distance / 1000) % 60);
+
+    countdownEl.innerHTML =
+      `${days}d ${hours}h ${minutes}m ${seconds}s until kickoff`;
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
 </body>
 </html>
