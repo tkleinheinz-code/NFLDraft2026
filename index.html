@@ -12,20 +12,22 @@
 
   /* ✅ SPLASH BACKGROUND IMAGE */
   body {
-    background:
-      linear-gradient(
-        rgba(0,0,0,0.55),
-        rgba(0,0,0,0.55)
-      ),
-      url("images/splash-image.jpg") no-repeat center center fixed;
-    background-size: cover;
+  background:
+    linear-gradient(
+      rgba(0,0,0,0.55),
+      rgba(0,0,0,0.55)
+    ),
+    url("images/splash-image.jpg") no-repeat center center fixed;
+  background-size: cover;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-  }
+  display: flex;
+  flex-direction: column;        /* ✅ stack items vertically */
+  align-items: center;           /* ✅ center horizontally */
+  justify-content: flex-start;   /* ✅ align to top */
+
+  text-align: center;
+  color: white;
+}
 
   h1 {
     margin-bottom: 10px;
