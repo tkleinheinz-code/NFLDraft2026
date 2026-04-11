@@ -18,7 +18,7 @@
       margin-bottom: 12px;
     }
     button {
-      padding: 10px 16px;
+      padding: 12px 18px;
       font-size: 16px;
       cursor: pointer;
     }
@@ -26,59 +26,134 @@
 </head>
 <body>
 
-  <h1>NFL Draft – Round 1 Predictions</h1>
+<h1>NFL Draft – Round 1 Predictions</h1>
 
-  <form id="draftForm">
-    <label>Name</label>
-    <input name="name" required />
+<form id="draftForm">
+  <label>Name</label>
+  <input name="name" required />
 
-    <hr />
+  <hr />
 
-    <!-- Picks 1–32 -->
-    <div id="picks"></div>
+  <div id="picks"></div>
 
-    <button type="submit">Submit Predictions</button>
-  </form>
+  <button type="submit">Submit Predictions</button>
+</form>
 
-  <script>
-    const picksDiv = document.getElementById("picks");
+<script>
+  // ✅ EDIT THIS LIST ONLY
+  const players = [
+"Akheem Mesidor, Edge, Miami",
+"Anthony Hill Jr., LB, Texas",
+"Arvell Reese, Edge, Ohio St.",
+"Avieon Terrell, CB, Clemson",
+"Blake Miller, OT, Clemson",
+"Brandon Cisse, CB, South Carolina",
+"Caleb Banks, DT, Florida",
+"Caleb Downs, S, Ohio St.",
+"Caleb Lomu, OT, Utah",
+"Carnell Tate, WR, Ohio St.",
+"Cashius Howell, Edge, Texas A&M",
+"Chase Bisontis, OG, Texas A&M",
+"Chris Bell, WR, Louisville",
+"Chris Johnson, CB, San Diego St.",
+"Christen Miller, DT, Georgia",
+"CJ Allen, LB, Georgia",
+"Colton Hood, CB, Tennessee",
+"D'Angelo Ponds, CB, Indiana",
+"David Bailey, Edge, Texas Tech",
+"Denzel Boston, WR, Washington",
+"Dillon Thieneman, S, Oregon",
+"E. McNeil-Warren, S, Toledo",
+"Fernando Mendoza, QB, Indiana",
+"Francis Mauigoa, OT, Miami",
+"Gabe Jacas, Edge, Illinois",
+"Germie Bernard, WR, Alabama",
+"Jacob Rodriguez, LB, Texas Tech",
+"Jadarian Price, RB, Notre Dame",
+"Jake Golday, TE, Cincinnati",
+"Jeremiyah Love, RB, Notre Dame",
+"Jermod McCoy, CB, Tennessee",
+"Jordyn Tyson, WR, Arizona St.",
+"Kayden McDonald, DT, Ohio St.",
+"Kayden Proctor, OT, Alabama",
+"KC Concepcion, WR, Texas A&M",
+"Keionte Scott, S, Miami",
+"Keldric Faulk, Edge, Auburn",
+"Kenyon Sadiq, TE, Oregon",
+"Keyron Crawford, Edge, Auburn",
+"Lee Hunter, DT, Texas Tech",
+"Makai Lemon, WR, USC",
+"Malachi Lawrence, Edge, USF",
+"Mansoor Delane, CB, LSU",
+"Max Iheanachor, OT, Arizona St.",
+"Monroe Freeling, OT, Georgia",
+"Olaivavega Ioane, OG, Penn St.",
+"Omar Cooper Jr., WR, Indiana",
+"Peter Woods, DT, Clemson",
+"R Mason Thomas, Edge, Oklahoma",
+"Rueben Bain Jr., Edge, Miami",
+"Sonny Styles, LB, Ohio St.",
+"Spencer Fano, OT, Utah",
+"TJ Parker, Edge, Clemson",
+"Ty Simpson, QB, Alabama",
+"Zion Young, Edge, Missouri",
+    // add more players as needed
+  ];
 
-    // Create Pick 1–32 inputs
+  const picksDiv = document.getElementById("picks");
+
+  // Create Pick 1–32 dropdowns
+  for (let i = 1; i <= 32; i++) {
+    const label = document.createElement("label");
+    label.textContent = `Pick ${i}`;
+
+    const select = document.createElement("select");
+    select.name = `pick${i}`;
+    select.required = true;
+
+    // Placeholder option
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = "-- Select Player --";
+    placeholder.disabled = true;
+    placeholder.selected = true;
+    select.appendChild(placeholder);
+
+    // Player options
+    players.forEach(player => {
+      const option = document.createElement("option");
+      option.value = player;
+      option.textContent = player;
+      select.appendChild(option);
+    });
+
+    picksDiv.appendChild(label);
+    picksDiv.appendChild(select);
+  }
+
+  // Submit predictions
+  document.getElementById("draftForm").onsubmit = async (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const data = {
+      name: form.name.value,
+      picks: []
+    };
+
     for (let i = 1; i <= 32; i++) {
-      const label = document.createElement("label");
-      label.textContent = `Pick ${i}`;
-
-      const input = document.createElement("input");
-      input.name = `pick${i}`;
-      input.required = true;
-
-      picksDiv.appendChild(label);
-      picksDiv.appendChild(input);
+      data.picks.push(form[`pick${i}`].value);
     }
 
-    document.getElementById("draftForm").onsubmit = async (e) => {
-      e.preventDefault();
+    await fetch("YOUR_APPS_SCRIPT_URL_HERE", {
+      method: "POST",
+      body: JSON.stringify(data)
+    });
 
-      const form = e.target;
-
-      const data = {
-        name: form.name.value,
-        picks: []
-      };
-
-      for (let i = 1; i <= 32; i++) {
-        data.picks.push(form[`pick${i}`].value);
-      }
-
-      await fetch("YOUR_APPS_SCRIPT_URL_HERE", {
-        method: "POST",
-        body: JSON.stringify(data)
-      });
-
-      alert("Predictions submitted successfully!");
-      form.reset();
-    };
-  </script>
+    alert("Predictions submitted!");
+    form.reset();
+  };
+</script>
 
 </body>
 </html>
