@@ -1,47 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
   <title>NFL Draft Predictions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: auto;
+    }
+    label {
+      font-weight: bold;
+    }
+    select, input {
+      width: 100%;
+      padding: 6px;
+      margin-bottom: 12px;
+    }
+    button {
+      padding: 10px 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <h1>NFL Draft Predictions</h1>
+
+  <h1>NFL Draft – Round 1 Predictions</h1>
 
   <form id="draftForm">
-    <label>Name</label><br>
-    <input name="name" required><br><br>
+    <label>Name</label>
+    <input name="name" required />
 
-    <!-- Pick inputs -->
-    <label>Pick 1</label><br>
-    <input name="pick1" required><br><br>
+    <hr />
 
-    <label>Pick 2</label><br>
-    <input name="pick2" required><br><br>
+    <!-- Picks 1–32 -->
+    <div id="picks"></div>
 
-    <!-- Repeat to Pick 32 -->
-
-    <button type="submit">Submit</button>
+    <button type="submit">Submit Predictions</button>
   </form>
 
   <script>
+    const picksDiv = document.getElementById("picks");
+
+    // Create Pick 1–32 inputs
+    for (let i = 1; i <= 32; i++) {
+      const label = document.createElement("label");
+      label.textContent = `Pick ${i}`;
+
+      const input = document.createElement("input");
+      input.name = `pick${i}`;
+      input.required = true;
+
+      picksDiv.appendChild(label);
+      picksDiv.appendChild(input);
+    }
+
     document.getElementById("draftForm").onsubmit = async (e) => {
       e.preventDefault();
 
+      const form = e.target;
+
       const data = {
-        name: e.target.name.value,
-        picks: [
-          e.target.pick1.value,
-          e.target.pick2.value
-          // ...pick32
-        ]
+        name: form.name.value,
+        picks: []
       };
 
-      await fetch("YOUR_APPS_SCRIPT_URL", {
+      for (let i = 1; i <= 32; i++) {
+        data.picks.push(form[`pick${i}`].value);
+      }
+
+      await fetch("YOUR_APPS_SCRIPT_URL_HERE", {
         method: "POST",
         body: JSON.stringify(data)
       });
 
-      alert("Predictions submitted!");
+      alert("Predictions submitted successfully!");
+      form.reset();
     };
   </script>
+
 </body>
 </html>
