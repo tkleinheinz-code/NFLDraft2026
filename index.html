@@ -1,1 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NFL Draft Predictions</title>
+</head>
+<body>
+  <h1>NFL Draft Predictions</h1>
 
+  <form id="draftForm">
+    <label>Name</label><br>
+    <input name="name" required><br><br>
+
+    <!-- Pick inputs -->
+    <label>Pick 1</label><br>
+    <input name="pick1" required><br><br>
+
+    <label>Pick 2</label><br>
+    <input name="pick2" required><br><br>
+
+    <!-- Repeat to Pick 32 -->
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    document.getElementById("draftForm").onsubmit = async (e) => {
+      e.preventDefault();
+
+      const data = {
+        name: e.target.name.value,
+        picks: [
+          e.target.pick1.value,
+          e.target.pick2.value
+          // ...pick32
+        ]
+      };
+
+      await fetch("YOUR_APPS_SCRIPT_URL", {
+        method: "POST",
+        body: JSON.stringify(data)
+      });
+
+      alert("Predictions submitted!");
+    };
+  </script>
+</body>
+</html>
