@@ -86,7 +86,9 @@
 
   <div id="picks"></div>
 
-  <button type="submit" class="leaderboard-btn">Submit Picks</button>
+  <button type="button" class="leaderboard-btn" id="submitBtn">
+  Submit Picks
+  </button>
 </form>
 
 <script>
@@ -177,34 +179,46 @@
     picksDiv.appendChild(select);
   }
 
-  // ✅ FORM SUBMISSION (THIS IS THE IMPORTANT PART)
-  document.getElementById("draftForm").onsubmit = async function (e) {
-    e.preventDefault();
+  <script>
+async function submitPicks() {
+  const name = document.querySelector('input[name="name"]').value;
 
-    const data = {
-      name: document.querySelector('input[name="name"]').value,
-      picks: []
-    };
+  if (!name) {
+    alert("Please enter your name.");
+    return;
+  }
 
-    for (let i = 1; i <= 32; i++) {
-      data.picks.push(
-        document.querySelector(`[name="pick${i}"]`).value
-      );
+  const picks = [];
+  for (let i = 1; i <= 32; i++) {
+    const val = document.querySelector(`[name="pick${i}"]`).value;
+    if (!val) {
+      alert("Please select all 32 picks before submitting.");
+      return;
     }
+    picks.push(val);
+  }
 
-    const response = await fetch(
-      "https://script.google.com/macros/s/AKfycbz2BveG3hZfTGKOurvKjtVIOatWB0LTVEEEp4jk9Y3nqCpSph2r1MDD9P-JhNf0HVoY/exec",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      }
-    );
+  const data = { name, picks };
 
-    const result = await response.text();
-    console.log(result);
-    alert("✅ Picks Are Locked In. Good Luck!");
-  };
+  console.log("Submitting:", data);
+
+  const response = await fetch(
+    "https://script.google.com/macros/s/AKfycbz2BveG3hZfTGKOurvKjtVIOatWB0LTVEEEp4jk9Y3nqCpSph2r1MDD9P-JhNf0HVoY/exec",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    }
+  );
+
+  const result = await response.text();
+  console.log(result);
+
+  alert("✅ Picks Are Locked In. Good Luck!");
+}
+
+// Attach click handler safely
+document.getElementById("submitBtn").addEventListener("click", submitPicks);
 </script>
 
 </body>
