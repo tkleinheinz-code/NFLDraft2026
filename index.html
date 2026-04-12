@@ -11,15 +11,41 @@
   letter-spacing: 1px;
 }
 
-/* ✅ BASE RULE — ALWAYS APPLIES */
-.bottom-left-graphic {
+/* Bottom-left container (ONLY thing that's fixed) */
+.bottom-left-container {
   position: fixed;
-  bottom: 12px;
-  left: 12px;
-  width: 150px;
-  height: auto;
-  max-width: none;
+  bottom: 8px;
+  left: 8px;
   z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Text above logo */
+.brought-by {
+  font-size: 12px;
+  margin-bottom: 6px;
+  opacity: 0.9;
+  white-space: nowrap;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+}
+
+/* Logo image */
+.bottom-left-graphic {
+  width: 64px;     /* adjust size here */
+  height: auto;
+  display: block;
+}
+
+/* Mobile refinement */
+@media (max-width: 600px) {
+  .bottom-left-graphic {
+    width: 40px;
+  }
+  .brought-by {
+    font-size: 11px;
+  }
 }
 
 /* ✅ MOBILE OVERRIDE ONLY */
