@@ -190,14 +190,21 @@
       data.picks.push(form[`pick${i}`].value);
     }
 
-    await fetch("https://script.google.com/macros/s/AKfycbz2BveG3hZfTGKOurvKjtVIOatWB0LTVEEEp4jk9Y3nqCpSph2r1MDD9P-JhNf0HVoY/exec", {
+<script>
+async function submitPicks(data) {
+  const response = await fetch("https://script.google.com/macros/s/AKfycbz2BveG3hZfTGKOurvKjtVIOatWB0LTVEEEp4jk9Y3nqCpSph2r1MDD9P-JhNf0HVoY/exec",
+    {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(data)
-    });
+    }
+  );
 
-    alert("Predictions submitted!");
-    form.reset();
-  };
+  const text = await response.text();
+  console.log(text);
+}
 </script>
 
 </body>
