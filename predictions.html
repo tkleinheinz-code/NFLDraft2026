@@ -23,6 +23,13 @@
       margin-bottom: 12px;
     }
 
+    .button-row {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .leaderboard-btn,
     button {
       background-color: #0b5ed7;
       color: white;
@@ -32,37 +39,32 @@
       font-weight: 600;
       cursor: pointer;
       border-radius: 4px;
-      margin-top: 20px;
     }
 
     button:hover {
       background-color: #094cbf;
     }
-         </div>
-<div class="button-row">
-  <a href="indes.html">
-    <button type="button" class="leaderboard-btn">
-      Home
-    </button>
-  </a>
-  
-  <a href="all-picks.html">
-    <button type="button" class="leaderboard-btn">
-      View All Picks
-    </button>
-  </a>
-  
-  <a href="leaderboard.html">
-    <button type="button" class="leaderboard-btn">
-      View Leaderboard
-    </button>
-  </a>
-</div>
   </style>
 </head>
+
 <body>
 
 <h1>🏈 NFL Draft – Round 1 Predictions</h1>
+
+<!-- Navigation buttons -->
+<div class="button-row">
+  <a href="index.html">
+    <button type="button" class="leaderboard-btn">Home</button>
+  </a>
+
+  <a href="all-picks.html">
+    <button type="button" class="leaderboard-btn">View All Picks</button>
+  </a>
+
+  <a href="leaderboard.html">
+    <button type="button" class="leaderboard-btn">View Leaderboard</button>
+  </a>
+</div>
 
 <label>Your Name</label>
 <input id="name" />
@@ -74,7 +76,7 @@
 <button onclick="submitPicks()">Submit Picks</button>
 
 <script>
-  // ✅ EDIT ONLY THIS URL
+  // ✅ Google Apps Script Web App URL
   const WEB_APP_URL =
     "https://script.google.com/macros/s/AKfycbw8jgBd4RBb8p0OHSF9ZGuIfkTjPZYgQSdgI2YTSt3LnvEtttCsYCWzQsX4GajvvC2nsQ/exec";
 
@@ -178,7 +180,7 @@
       picks.push(val);
     }
 
-    const res = await fetch(WEB_APP_URL, {
+    const res = await fetch(https://script.google.com/macros/s/AKfycbyGgbAsxPTElUwTmbVjMnTxyIxFDh0mQkF6Wg8E2cHMM4RIcNAHLoaDZ4-3Nx8KnH-K4A/exec, {
       method: "POST",
       headers: { "Content-Type": "text/plain" },
       body: JSON.stringify({ name, picks })
