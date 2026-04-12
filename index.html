@@ -77,6 +77,7 @@ button {
 button:hover {
   background-color: #094cbf;
 }
+/* Bottom-left container */
 .bottom-left-container {
   position: fixed;
   bottom: 8px;
@@ -87,16 +88,31 @@ button:hover {
   align-items: flex-start;
 }
 
+/* Text above logo */
 .brought-by {
   font-size: 12px;
-  margin-bottom: 4px;
-  opacity: 0.85;
+  margin-bottom: 6px;
+  opacity: 0.9;
   white-space: nowrap;
+  z-index: 1000;          /* ✅ Ensure text is above image */
+  text-shadow: 0 1px 3px rgba(0,0,0,0.7); /* ✅ readability */
 }
 
+/* Logo image */
 .bottom-left-graphic {
-  width: 52px;   /* adjust if desired */
+  width: 64px;   /* ✅ adjust size here only */
   height: auto;
+  z-index: 999;
+}
+
+/* Mobile refinement */
+@media (max-width: 600px) {
+  .bottom-left-graphic {
+    width: 44px;
+  }
+  .brought-by {
+    font-size: 11px;
+  }
 }
   </style>
 </head>
@@ -156,7 +172,6 @@ button:hover {
   <div class="brought-by">
     Brought to you by <strong>The Niner Guys Podcast</strong>
   </div>
-
   <img
     src="images/Niner-Guys.jpg"
     class="bottom-left-graphic"
