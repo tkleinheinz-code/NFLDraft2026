@@ -16,13 +16,17 @@
     font-size: 30px;
     }
 .bottom-left-graphic {
-  position: fixed;
-  bottom: 14px;
+  position: fixed !important;
+  bottom: 10px;
   left: 10px;
-  width: 70px;
-  max-width: 20vw;
-  opacity: 0.9;
-  z-index: 5;
+
+  width: 48px !important;
+  height: auto;
+
+  max-width: none !important;
+  transform: none !important;
+
+  z-index: 999;
 }
 
 }
@@ -135,6 +139,10 @@
   updateCountdown();
   setInterval(updateCountdown, 1000);
 </script>
-  <img src="images/Niner-Guys.jpg" class="bottom-left-graphic" alt="Graphic" />
+<img
+  src="images/Niner-Guys.jpg"
+  class="bottom-left-graphic"
+  alt="Logo"
+/>
 </body>
 </html>
