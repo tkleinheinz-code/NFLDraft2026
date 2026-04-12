@@ -77,7 +77,28 @@ button {
 button:hover {
   background-color: #094cbf;
 }
-</style>
+.bottom-left-container {
+  position: fixed;
+  bottom: 8px;
+  left: 8px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.brought-by {
+  font-size: 12px;
+  margin-bottom: 4px;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+.bottom-left-graphic {
+  width: 52px;   /* adjust if desired */
+  height: auto;
+}
+  </style>
 </head>
 <body>
   <div class="content">
@@ -131,10 +152,16 @@ button:hover {
   updateCountdown();
   setInterval(updateCountdown, 1000);
 </script>
-<img
-  src="images/Niner-Guys.jpg"
-  class="bottom-left-graphic"
-  alt="Logo"
-/>
+<div class="bottom-left-container">
+  <div class="brought-by">
+    Brought to you by <strong>The Niner Guys Podcast</strong>
+  </div>
+
+  <img
+    src="images/Niner-Guys.jpg"
+    class="bottom-left-graphic"
+    alt="The Niner Guys Podcast"
+  />
+</div>
 </body>
 </html>
