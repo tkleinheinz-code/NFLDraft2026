@@ -204,21 +204,16 @@ async function submitPicks() {
   console.log("Submitting:", data);
 
   try {
-    const response = await fetch(
-      "https://script.google.com/macros/s/AKfycbyoY0qublw6tboX6_GP0ErCv5HKYkbWRdR4zX8A-0t-TfcfipBSncGnhwLcZbF-Yy9KfA/exec",
-      {
-        method: "POST",
-        mode: "cors",
-        redirect: "follow",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      }
-    );
+    const response = await fetch("NEW_WEB_APP_URL_HERE", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(data)
+});
 
-    const text = await response.text();
-    console.log("Server response:", text);
+const text = await response.text();
+alert(text);
 
     alert("✅ Picks are locked in. Good luck!");
 
