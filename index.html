@@ -15,15 +15,21 @@
   #countdown {
     font-size: 30px;
     }
-  .bottom-left-graphic {
+.bottom-left-graphic {
   position: fixed;
-  bottom: 10px;
+  bottom: 14px;
   left: 10px;
-  width: 30px;         /* adjust size */
-  max-width: 15vw;      /* responsive safeguard */
-  opacity: 0.95;
+  width: 70px;
+  max-width: 20vw;
+  opacity: 0.9;
   z-index: 5;
 }
+@media (max-width: 600px) {
+  .bottom-left-graphic {
+    width: 50px;
+    bottom: 10px;
+    left: 8px;
+  }
 
 }
   html, body {
