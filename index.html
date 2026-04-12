@@ -4,87 +4,79 @@
   <meta charset="UTF-8" />
   <title>NFL Draft Predictions</title>
   <style>
-    #countdown {
+#countdown {
   font-size: 48px;
   font-weight: 700;
   margin: 28px 0;
   letter-spacing: 1px;
 }
 
-@media (max-width: 600px) {
-  #countdown {
-    font-size: 30px;
-    }
+/* ✅ BASE RULE — ALWAYS APPLIES */
 .bottom-left-graphic {
-  position: fixed !important;
-  bottom: 10px;
-  left: 10px;
-
-  width: 48px !important;
+  position: fixed;
+  bottom: 12px;
+  left: 12px;
+  width: 48px;
   height: auto;
-
-  max-width: none !important;
-  transform: none !important;
-
+  max-width: none;
   z-index: 999;
 }
 
-}
-  html, body {
-    height: 100%;
-    margin: 0;
-    font-family: Arial, sans-serif;
+/* ✅ MOBILE OVERRIDE ONLY */
+@media (max-width: 600px) {
+  #countdown {
+    font-size: 30px;
   }
 
-  /* ✅ SPLASH BACKGROUND IMAGE */
-  body {
+  .bottom-left-graphic {
+    width: 36px;
+    bottom: 8px;
+    left: 8px;
+  }
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
   background:
-    linear-gradient(
-      rgba(0,0,0,0.55),
-      rgba(0,0,0,0.55)
-    ),
+    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
     url("images/splash-image.jpg") no-repeat center center fixed;
   background-size: cover;
 
   display: flex;
-  flex-direction: column;        /* ✅ stack items vertically */
-  align-items: center;           /* ✅ center horizontally */
-  justify-content: flex-start;   /* ✅ align to top */
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 
   text-align: center;
   color: white;
 }
 
-  h1 {
-    margin-bottom: 10px;
-  }
+.button-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 30px;
+}
 
-  p {
-    font-size: 18px;
-    margin-bottom: 30px;
-  }
+button {
+  background-color: #0b5ed7;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 5px;
+}
 
-  .button-row {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 30px;
-  }
-
-  button {
-    background-color: #0b5ed7;
-    color: white;
-    border: none;
-    padding: 14px 20px;
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-
-  button:hover {
-    background-color: #094cbf;
-  }
+button:hover {
+  background-color: #094cbf;
+}
 </style>
 </head>
 <body>
