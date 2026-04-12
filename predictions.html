@@ -190,7 +190,7 @@
       data.picks.push(form[`pick${i}`].value);
     }
 
-    await fetch("YOUR_APPS_SCRIPT_URL_HERE", {
+    await fetch("https://script.google.com/macros/s/AKfycbz2BveG3hZfTGKOurvKjtVIOatWB0LTVEEEp4jk9Y3nqCpSph2r1MDD9P-JhNf0HVoY/exec", {
       method: "POST",
       body: JSON.stringify(data)
     });
