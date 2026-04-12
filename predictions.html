@@ -181,46 +181,40 @@ async function submitPicks() {
   alert("✅ Button click detected");
 
   const nameInput = document.querySelector('input[name="name"]');
-  if (!nameInput || !nameInput.value.trim()) {
+  if (!nameInput.value.trim()) {
     alert("Please enter your name.");
     return;
   }
 
   const picks = [];
   for (let i = 1; i <= 32; i++) {
-    const el = document.querySelector(`[name="pick${i}"]`);
-    if (!el || !el.value) {
-      alert(`Please select a player for Pick ${i}.`);
+    const val = document.querySelector(`[name="pick${i}"]`).value;
+    if (!val) {
+      alert(`Please select a player for Pick ${i}`);
       return;
     }
-    picks.push(el.value);
+    picks.push(val);
   }
 
-  const data = {
+  const payload = JSON.stringify({
     name: nameInput.value.trim(),
     picks: picks
-  };
+  });
 
-  console.log("Submitting:", data);
+  const response = await fetch(
+    "YOUR_NEW_WEB_APP_URL_HERE",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain"   // ✅ NO PREFLIGHT
+      },
+      body: payload
+    }
+  );
 
-  try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbytgVgBZBeg9CmmjRmy5NaF8F1hSEGx8Ypn5PkHAYxYrNEFGwbiFbg8-NTF80LXKkpL/exec", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify(data)
-});
-
-const text = await response.text();
-alert(text);
-
-    alert("✅ Picks are locked in. Good luck!");
-
-  } catch (err) {
-    console.error(err);
-    alert("❌ Submission failed. Check console.");
-  }
+  const text = await response.text();
+  console.log(text);
+  alert("✅ Picks are locked in. Good luck!");
 }
 </script>
 
