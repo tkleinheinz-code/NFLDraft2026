@@ -15,6 +15,16 @@
   #countdown {
     font-size: 30px;
     }
+  .bottom-left-graphic {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 120px;         /* adjust size */
+  max-width: 25vw;      /* responsive safeguard */
+  opacity: 0.95;
+  z-index: 5;
+}
+
 }
   html, body {
     height: 100%;
@@ -125,5 +135,6 @@
   updateCountdown();
   setInterval(updateCountdown, 1000);
 </script>
+  <img src="images/Niner-Guys.jpg" class="bottom-left-graphic" alt="Graphic" />
 </body>
 </html>
