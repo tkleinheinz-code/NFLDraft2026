@@ -45,6 +45,15 @@
     button:hover {
       background-color: #094cbf;
     }
+    /* ===== Already Taken visual cue ===== */
+
+option:disabled {
+  color: #999;
+  text-decoration: line-through;
+}
+option.selected-pick {
+  font-weight: 600;
+}
     /* ===== Mobile-friendly adjustments ===== */
 
 @media (max-width: 600px) {
@@ -79,15 +88,7 @@
     gap: 10px;
   }
 }
-/* ===== Already Taken visual cue ===== */
 
-option:disabled {
-  color: #999;
-  text-decoration: line-through;
-}
-option.selected-pick {
-  font-weight: 600;
-}
 
   </style>
 </head>
