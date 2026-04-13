@@ -45,6 +45,41 @@
     button:hover {
       background-color: #094cbf;
     }
+    /* ===== Mobile-friendly adjustments ===== */
+
+@media (max-width: 600px) {
+  body {
+    padding: 0 12px;
+  }
+
+  h1 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  label {
+    font-size: 14px;
+  }
+
+  select,
+  input {
+    font-size: 16px;       /* Prevents iOS zoom */
+    padding: 10px;
+  }
+
+  button,
+  .leaderboard-btn {
+    width: 100%;
+    font-size: 16px;
+    padding: 14px;
+  }
+
+  .button-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
   </style>
 </head>
 
