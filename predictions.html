@@ -79,7 +79,12 @@
     gap: 10px;
   }
 }
+/* ===== Already Taken visual cue ===== */
 
+option:disabled {
+  color: #999;
+  text-decoration: line-through;
+}
   </style>
 </head>
 
@@ -226,21 +231,24 @@
       placeholder.textContent = "-- Select Player --";
       select.appendChild(placeholder);
 
-      players.forEach(player => {
-        const option = document.createElement("option");
-        option.value = player;
-        option.textContent = player;
+players.forEach(player => {
+  const option = document.createElement("option");
+  option.value = player;
 
-        if (selectedPlayers.has(player) && player !== currentValue) {
-          option.disabled = true;
-        }
+  if (selectedPlayers.has(player) && player !== currentValue) {
+    option.disabled = true;
+    option.textContent = player + " (Taken)";
+  } else {
+    option.textContent = player;
+  }
 
-        if (player === currentValue) {
-          option.selected = true;
-        }
+  if (player === currentValue) {
+    option.selected = true;
+  }
 
-        select.appendChild(option);
-      });
+  select.appendChild(option);
+});
+
     }
   }
 
