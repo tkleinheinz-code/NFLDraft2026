@@ -76,17 +76,13 @@
 <button onclick="submitPicks()">Submit Picks</button>
 
 <script>
-  /* ===============================
-     UNIQUE PLAYER SELECTION SUPPORT
-     =============================== */
-
+  // ===== STATE =====
   const selectedPlayers = new Set();
+  const previousValues = {};
 
-  // ✅ Google Apps Script Web App URL
   const WEB_APP_URL =
     "https://script.google.com/macros/s/AKfycbw8jgBd4RBb8p0OHSF9ZGuIfkTjPZYgQSdgI2YTSt3LnvEtttCsYCWzQsX4GajvvC2nsQ/exec";
 
-  // ✅ All available players
   const players = [
     "Akheem Mesidor, Edge, Miami",
     "Anthony Hill Jr., LB, Texas",
@@ -152,10 +148,7 @@
 
   const picksDiv = document.getElementById("picks");
 
-  /* ===============================
-     BUILD PICK DROPDOWNS
-     =============================== */
-
+  // ===== BUILD DROPDOWNS =====
   for (let i = 1; i <= 32; i++) {
     const label = document.createElement("label");
     label.textContent = "Pick " + i;
@@ -163,85 +156,61 @@
     const select = document.createElement("select");
     select.id = "pick" + i;
 
-select.addEventListener("change", () => {
-  refreshDropdowns(select.id);
-});
+    previousValues[select.id] = "";
+
+    select.addEventListener("change", () => {
+      const newValue = select.value;
+
+      if (selectedPlayers.has(newValue)) {
+        alert("That player has already been selected.");
+        select.value = previousValues[select.id];
+        return;
+      }
+
+      selectedPlayers.delete(previousValues[select.id]);
+      if (newValue) selectedPlayers.add(newValue);
+
+      previousValues[select.id] = newValue;
+      refreshDropdowns();
+    });
 
     picksDiv.appendChild(label);
     picksDiv.appendChild(select);
   }
 
-  /* ===============================
-     TRACK & REFRESH SELECTIONS
-     =============================== */
+  // ===== REFRESH OPTIONS =====
+  function refreshDropdowns() {
+    for (let i = 1; i <= 32; i++) {
+      const select = document.getElementById("pick" + i);
+      const currentValue = select.value;
 
-function getSelections() {
-  const selections = {};
-  for (let i = 1; i <= 32; i++) {
-    const val = document.getElementById("pick" + i).value;
-    if (val) {
-      selections["pick" + i] = val;
+      select.innerHTML = "";
+      const placeholder = document.createElement("option");
+      placeholder.value = "";
+      placeholder.textContent = "-- Select Player --";
+      select.appendChild(placeholder);
+
+      players.forEach(player => {
+        const option = document.createElement("option");
+        option.value = player;
+        option.textContent = player;
+
+        if (selectedPlayers.has(player) && player !== currentValue) {
+          option.disabled = true;
+        }
+
+        if (player === currentValue) {
+          option.selected = true;
+        }
+
+        select.appendChild(option);
+      });
     }
   }
-  return selections;
-}
-    }
-  }
-
-function refreshDropdowns(changedPickId = null) {
-  const selections = getSelections();
-  const chosenPlayers = Object.values(selections);
-
-  for (let i = 1; i <= 32; i++) {
-    const select = document.getElementById("pick" + i);
-    const pickId = "pick" + i;
-    const currentValue = select.value;
-
-    // ❌ DUPLICATE PREVENTION
-    if (
-      currentValue &&
-      chosenPlayers.filter(p => p === currentValue).length > 1
-    ) {
-      select.value = "";
-      if (pickId === changedPickId) {
-        alert("That player is already selected in another slot.");
-      }
-    }
-
-    select.innerHTML = "";
-
-    const placeholder = document.createElement("option");
-    placeholder.value = "";
-    placeholder.textContent = "-- Select Player --";
-    select.appendChild(placeholder);
-
-    players.forEach(player => {
-      const option = document.createElement("option");
-      option.value = player;
-      option.textContent = player;
-
-      if (
-        chosenPlayers.includes(player) &&
-        selections[pickId] !== player
-      ) {
-        option.disabled = true;
-      }
-
-      if (player === select.value) {
-        option.selected = true;
-      }
-
-      select.appendChild(option);
-    });
-  }
-}
 
   refreshDropdowns();
 
-  /* ===============================
-     SUBMISSION HANDLER
-     =============================== */
-
+  // ===== SUBMIT =====
   async function submitPicks() {
     const name = document.getElementById("name").value.trim();
     if (!name) {
