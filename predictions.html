@@ -85,6 +85,10 @@ option:disabled {
   color: #999;
   text-decoration: line-through;
 }
+option.selected-pick {
+  font-weight: 600;
+}
+``
   </style>
 </head>
 
@@ -235,15 +239,20 @@ players.forEach(player => {
   const option = document.createElement("option");
   option.value = player;
 
-  if (selectedPlayers.has(player) && player !== currentValue) {
-    option.disabled = true;
-    option.textContent = player + " (Taken)";
-  } else {
-    option.textContent = player;
-  }
-
+  // ✅ Currently selected in THIS dropdown
   if (player === currentValue) {
+    option.textContent = "✅ " + player;
     option.selected = true;
+    option.classList.add("selected-pick");
+  }
+  // ❌ Selected elsewhere
+  else if (selectedPlayers.has(player)) {
+    option.textContent = player + " (Taken)";
+    option.disabled = true;
+  }
+  // ✅ Available
+  else {
+    option.textContent = player;
   }
 
   select.appendChild(option);
