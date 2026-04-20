@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Leaderboard</title>
-</head>
+
   <style>
     body {
       font-family: Arial, sans-serif;
       max-width: 95%;
       margin: auto;
     }
-    iframe {
-      width: 100%;
-      height: 90vh;
-      border: none;
-    }
+
     .button-row {
       display: flex;
       gap: 14px;
       margin-bottom: 16px;
+      flex-wrap: wrap;
     }
+
     .leaderboard-btn {
       background-color: #0b5ed7;
       color: white;
@@ -29,39 +29,33 @@
       cursor: pointer;
       border-radius: 4px;
     }
+
     .leaderboard-btn:hover {
       background-color: #094cbf;
     }
+
+    iframe {
+      width: 100%;
+      height: 90vh;
+      border: none;
+    }
   </style>
+</head>
+
 <body>
-  <h1>Live Leaderboard</h1>
 
-</div>
-<div class="button-row">
-    <a href="index.html">
-    <button type="button" class="leaderboard-btn">
-      Home
-    </button>
-  </a>
-  
-  <a href="all-picks.html">
-    <button type="button" class="leaderboard-btn">
-      View All Picks
-    </button>
-  </a>
+  <h1>🏆 Live Leaderboard</h1>
 
-<a href="predictions.html">
-    <button type="button" class="leaderboard-btn">
-      Make Your Picks
-    </button>
-  </a>
-</div>
+  <div class="button-row">
+    <a href="index.html"><button class="leaderboard-btn">Home</button></a>
+    <a href="all-picks.html"><button class="leaderboard-btn">View All Picks</button></a>
+    <a href="predictions.html"><button class="leaderboard-btn">Make Your Picks</button></a>
+  </div>
 
   <iframe
-    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRf-1SSaPfYV7n8VeZxvkLXnz5wtRsddtyaWMZNnjT8QoK8WfZ3oRXdIS1Xbb98vudzDwmOdqdLLdWt/pubhtml?gid=1874291936&single=true"
-    width="100%"
-    height="600"
-    frameborder="0">
+    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRf-1SSaPfYV7n8VeZxvkLXnz5wtRsddtyaWMZNnjT8QoK8WfZ3oRXdIS1Xbb98vudzDwmOdqdLLdWt/pubhtml?gid=1874291936&single=true">
   </iframe>
+
 </body>
 </html>
+``
